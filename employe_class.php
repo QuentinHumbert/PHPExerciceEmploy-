@@ -20,14 +20,23 @@ class Employe{
         $this -> service = $service;
     }
 
-    public function getAnneeTravailTotal($dateembauche){
+    public function getAnneeTravailTotal(){
+        $datetravail = new DateTime($this -> dateembauche);
         $dateactuel = new DateTime();
-        $anneeembauche = $dateactuel -> diff($dateembauche);
+        $anneeembauche = $dateactuel -> diff($datetravail);
         return $anneeembauche -> format('Y');
     }
 
-    public function getSalairePlusPrime($salaire){
-        
+    public function getSalairePlusPrime(){
+        $anneeembauche = $this -> getAnneeTravailTotal();
+        $dateactuel = new DateTime();
+        $salaireemploye = $this -> salaire;
+
+        $primeannuel = $salaireemploye * (5 / 100);
+        $primeanciennete = ($salaireemploye * (2 / 100)) * $anneeembauche;
+        if ($dateactuel == ''){
+            print('Le salaire à bien était envoyé');
+        }
     }
 }
 
