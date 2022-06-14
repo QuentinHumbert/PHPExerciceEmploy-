@@ -27,17 +27,50 @@ class Employe{
         return $anneeembauche -> format('Y');
     }
 
-    public function getSalairePlusPrime(){
+    public function getPrime(){
         $anneeembauche = $this -> getAnneeTravailTotal();
-        $dateactuel = new DateTime();
         $salaireemploye = $this -> salaire;
 
         $primeannuel = $salaireemploye * (5 / 100);
         $primeanciennete = ($salaireemploye * (2 / 100)) * $anneeembauche;
-        if ($dateactuel == ''){
-            print('Le salaire à bien était envoyé');
+
+        $dateactuel = (new DateTime()) -> format('m-d');
+        if ($dateactuel == (new DateTime()) -> format('11-30')){
+            print('La prime à bien était envoyé');
+        } else {
+            print('La prime n\'a pas était envoyé');
         }
     }
-}
 
-?>
+    public function rapportNombreEmploye(array $liste){
+        print_r(count($liste));
+    }
+
+    public static function sortByNom($liste, $liste2){
+        return strtolower($liste->nom) <=> strtolower($liste2->nom);
+
+    }
+
+    public static function sortByService($liste, $liste2){
+        return strtolower($liste->service) <=> strtolower($liste2->service);
+    }
+
+    // public function rapportListeEmploye(array $liste){
+    //     $columnnom = array_column($liste, $this -> nom);
+    //     $columnprenom = array_column($liste, $this -> prenom);
+    //     array_multisort($columnnom, SORT_ASC, $columnprenom, SORT_ASC, $liste);
+    //     foreach($liste as $object){
+    //         print_r($object);
+    //     }
+    // }
+
+    // public function rapportListeService(array $liste){
+    //     $columnservice = array_column($liste, $this -> service);
+    //     $columnnom = array_column($liste, $this -> nom);
+    //     $columnprenom = array_column($liste, $this -> prenom);
+    //     array_multisort($columnservice, SORT_ASC, $columnnom, SORT_ASC, $columnprenom, SORT_ASC, $liste);
+    //     foreach($liste as $object){
+    //         print_r($object);
+    //     }
+    // }
+}
