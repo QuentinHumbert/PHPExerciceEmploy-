@@ -1,25 +1,49 @@
 <?php 
-
 class Employe{
     // Propriétés de la classe
-    private $nom = '';
-    private $prenom = '';
-    private $dateembauche = '';
-    private $fonction = '';
-    private $salaire = '';
+    private $name = '';
+    private $firstname = '';
+    private $employementday = '';
+    private $function = '';
+    private $salary = '';
     private $service = '';
+    private $agency = '';
 
-    // Méthode de la classe
-    public function __construct($nom = '',$prenom = '',$dateembauche = '',$fonction = '',$salaire = '',$service = '')
+    // Méthodes de la classe
+    // Constructeur de la classe
+    public function __construct($name = '',$firstname = '',$dateembauche = '',$function = '',$salary = '',$service = '',$agency='')
     {
-        $this -> nom = $nom;
-        $this -> prenom = $prenom;
+        $this -> name = $name;
+        $this -> firstname = $firstname;
         $this -> dateembauche = $dateembauche;
-        $this -> fonction = $fonction;
-        $this -> salaire = $salaire;
+        $this -> function = $function;
+        $this -> salary = $salary;
         $this -> service = $service;
+        $this -> agency = $agency;
     }
 
+    // Getter des propriétés privée de la classe
+    public function getName(){
+        return $this -> name;
+    }
+
+    public function getFirstName(){
+        return $this -> firstname;
+    }
+
+    public function getService(){
+        return $this -> service;
+    }
+
+    public function getSalary(){
+        return $this -> service;
+    }
+
+    public function getAgencyName(){
+        return $this -> agency;
+    }
+
+    // Réccupèrer les années de travail d'un employé
     public function getAnneeTravailTotal(){
         $datetravail = new DateTime($this -> dateembauche);
         $dateactuel = new DateTime();
@@ -27,38 +51,50 @@ class Employe{
         return $anneeembauche -> format('Y');
     }
 
+    // Obtenir la prime d'un employé
     public function getPrime(){
         $anneeembauche = $this -> getAnneeTravailTotal();
-        $salaireemploye = $this -> salaire;
+        $salaryemploye = $this -> salary;
 
-        $primeannuel = $salaireemploye * (5 / 100);
-        $primeanciennete = ($salaireemploye * (2 / 100)) * $anneeembauche;
+        $primeannuel = $salaryemploye * (5 / 100);
+        $primeanciennete = ($salaryemploye * (2 / 100)) * intval($anneeembauche);
+        return $primetotal = $primeannuel + $primeanciennete;
+    }
 
-        $dateactuel = (new DateTime()) -> format('m-d');
-        if ($dateactuel == (new DateTime()) -> format('11-30')){
-            print('La prime à bien était envoyé');
+    // Compteur dans un tableau d'objet
+    public function rapportNombreEmploye(array $l){
+        print_r(count($l));
+    }
+
+    // Comparateur statique pour les propriétés nom et prénom
+    public static function sortByName($l1, $l2){
+        if (strtolower($l1->name) == strtolower($l2->name)) {
+            return strtolower($l1->firstname) <=> strtolower($l2->firstname);
         } else {
-            print('La prime n\'a pas était envoyé');
+            return strtolower($l1->name) <=> strtolower($l2->name);
         }
     }
 
-    public function rapportNombreEmploye(array $liste){
-        print_r(count($liste));
+    // Comparateur statique pour la propriété service
+    public static function sortByService($l1, $l2){
+        if (strtolower($l1->service) == strtolower($l2->service)){
+            Employe::sortByName($l1, $l2);
+        } else {
+            return strtolower($l1->service) <=> strtolower($l2->service);
+        }
     }
 
-    public static function sortByNom($liste, $liste2){
-        return strtolower($liste->nom) <=> strtolower($liste2->nom);
-
+    // Calcul du salaire total
+    public function getTotalSalary(){
+        return $this -> salary + $this -> getPrime();
     }
 
-    public static function sortByService($liste, $liste2){
-        return strtolower($liste->service) <=> strtolower($liste2->service);
-    }
+
 
     // public function rapportListeEmploye(array $liste){
-    //     $columnnom = array_column($liste, $this -> nom);
-    //     $columnprenom = array_column($liste, $this -> prenom);
-    //     array_multisort($columnnom, SORT_ASC, $columnprenom, SORT_ASC, $liste);
+    //     $columnname = array_column($liste, $this -> name);
+    //     $columnfirstname = array_column($liste, $this -> firstname);
+    //     array_multisort($columnname, SORT_ASC, $columnfirstname, SORT_ASC, $liste);
     //     foreach($liste as $object){
     //         print_r($object);
     //     }
@@ -66,9 +102,9 @@ class Employe{
 
     // public function rapportListeService(array $liste){
     //     $columnservice = array_column($liste, $this -> service);
-    //     $columnnom = array_column($liste, $this -> nom);
-    //     $columnprenom = array_column($liste, $this -> prenom);
-    //     array_multisort($columnservice, SORT_ASC, $columnnom, SORT_ASC, $columnprenom, SORT_ASC, $liste);
+    //     $columnname = array_column($liste, $this -> name);
+    //     $columnfirstname = array_column($liste, $this -> firstname);
+    //     array_multisort($columnservice, SORT_ASC, $columnname, SORT_ASC, $columnfirstname, SORT_ASC, $liste);
     //     foreach($liste as $object){
     //         print_r($object);
     //     }
