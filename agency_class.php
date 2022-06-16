@@ -20,6 +20,10 @@ class Agency{
         return $this -> agencyname;
     }
 
+    public function getFoodService(){
+        return $this -> foodservice;
+    }
+
 }
 
 ?>
