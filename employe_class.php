@@ -53,6 +53,11 @@ class Employe
         return $this->agency;
     }
 
+    public function getFunction()
+    {
+        return $this->function;
+    }
+
     // Réccupèrer les années de travail d'un employé
     public function getAnneeTravailTotal()
     {
