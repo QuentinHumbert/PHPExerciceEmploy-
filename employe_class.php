@@ -59,7 +59,7 @@ class Employe
     }
 
     // Réccupèrer les années de travail d'un employé
-    public function getAnneeTravailTotal()
+    public function getTotalWorkingHours()
     {
         $datetravail = new DateTime($this->employementday);
         $dateactuel = new DateTime();
@@ -68,9 +68,9 @@ class Employe
     }
 
     // Obtenir la prime d'un employé
-    public function getPrime()
+    public function getBonus()
     {
-        $anneeembauche = $this->getAnneeTravailTotal();
+        $anneeembauche = $this->getTotalWorkingHours();
         $salaryemploye = $this->salary;
 
         $primeannuel = $salaryemploye * (5 / 100);
@@ -101,13 +101,13 @@ class Employe
     // Calcul du salaire total
     public function getTotalSalary()
     {
-        return $this->salary + $this->getPrime();
+        return $this->salary + $this->getBonus();
     }
 
     // Obtenir les chèques vacances
     public function getHolidayCheck()
     {
-        if (intval($this->getAnneeTravailTotal()) >= 1) {
+        if (intval($this->getTotalWorkingHours()) >= 1) {
             return print_r($this->firstname . " " . $this->name . " peut obtenir des chèques vacances\n");
         } else {
             return print_r($this->firstname . " " . $this->name . " ne peut pas obtenir des chèques vacances\n");

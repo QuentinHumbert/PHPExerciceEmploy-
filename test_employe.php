@@ -16,22 +16,21 @@ $employe5 = new Employe('Maker', 'Paul', '2003-07-24', 'Commercial', 10000, 'Com
 
 $listeentreprise = array($director, $employe1, $employe2, $employe3, $employe4, $employe5);
 
-EnvoyePrime($director);
 
 
 // Fonctions
-function EnvoyePrime($e)
+function sendPrime($e)
 {
     if ($e->getFunction() == "Directeur") {
-        $dateactuel = (new DateTime())->format('%m-%d');
-        if ($dateactuel == (new DateTime())->format('11-30')) {
+        $today = (new DateTime())->format('%m-%d');
+        if ($today == (new DateTime())->format('11-30')) {
             print("La prime de " . $e->getFirstName() . " " . $e->getName() . " de " . $e->getDirectorPrime() . " € à bien était envoyé\n");
         } else {
             print("L'envoi n'a pas était effectué\n");
         }
     } else {
-        $dateactuel = (new DateTime())->format('%m-$d');
-        if ($dateactuel == (new DateTime())->format('11-30')) {
+        $today = (new DateTime())->format('%m-$d');
+        if ($today == (new DateTime())->format('11-30')) {
             print("La prime de " . $e->getFirstName() . " " . $e->getName() . " de " . $e->getPrime() . " € à bien était envoyé\n");
         } else {
             print("L'envoi n'a pas était effectué\n");
@@ -39,12 +38,12 @@ function EnvoyePrime($e)
     }
 }
 
-function rapportNombreEmploye(array $l)
+function reportEmployeNumber(array $l)
 {
     return print_r("Nombre d'employés: " . count($l) . "\n");
 }
 
-function rapportListeEmploye(array $l)
+function reportEmployeList(array $l)
 {
     usort($l, [Employe::class, 'sortByName']);
     foreach ($l as $employe) {
@@ -52,7 +51,7 @@ function rapportListeEmploye(array $l)
     }
 }
 
-function rapportListeServiceEmploye(array $l)
+function reportEmployeInServiceList(array $l)
 {
     usort($l, [Employe::class, 'sortByService']);
     foreach ($l as $employe) {
@@ -60,13 +59,13 @@ function rapportListeServiceEmploye(array $l)
     }
 }
 
-function rapportSalaireTotal(array $l)
+function reportPayroll(array $l)
 {
-    $massesalarial = [];
+    $payroll = [];
     foreach ($l as $employe) {
-        array_push($massesalarial, $employe->getTotalSalary());
+        array_push($payroll, $employe->getTotalSalary());
     }
-    print_r("La masse salarial est de " . array_sum($massesalarial) . "€\n");
+    print_r("La masse salarial est de " . array_sum($payroll) . "€\n");
 }
 
 function getFoodServiceEmploye($e)

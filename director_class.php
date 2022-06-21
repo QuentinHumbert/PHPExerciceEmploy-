@@ -4,9 +4,9 @@
     class Director extends Employe
     {
             // Obtenir la prime d'un employé
-        public function getDirectorPrime()
+        public function getDirectorBonus()
         {
-            $anneeembauche = $this->getAnneeTravailTotal();
+            $anneeembauche = $this->getTotalWorkingHours();
             $salaryemploye = $this->getSalary();
 
             $primeannuel = $salaryemploye * (7 / 100);
