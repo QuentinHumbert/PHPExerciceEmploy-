@@ -72,3 +72,5 @@ function getFoodServiceEmploye($e)
 {
     print("L'employé est dans " . $e->getAgencyName() . "avec le service des restauration suivante: " . $e->getAgencyName()->getFoodService() . "\n");
 }
+
+// array_multisort(array_column( $employeesTable, 'lastname' ), SORT_ASC,array_column( $employeesTable, 'firstname' ), SORT_ASC, $employeesTable);
